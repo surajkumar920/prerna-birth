@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Happy Birthday Prerna — From Suraj 🎉</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    /* ---------- Background + layout ---------- */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+    :root {
+      --accent1: #ff66cc;
+      --accent2: #ff3399;
+      --card-bg: rgba(255,255,255,0.9);
+      --glass: rgba(255,255,255,0.6);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      animation: backgroundShift 18s infinite alternate;
+    }
+    @keyframes backgroundShift {
+      0% { background: linear-gradient(135deg,#ffccd9 0%, #ffe6cc 50%); }
+      33% { background: linear-gradient(135deg,#fff0cc 0%, #e6ffcc 50%); }
+      66% { background: linear-gradient(135deg,#ccf0ff 0%, #e8ccff 50%); }
+      100% { background: linear-gradient(135deg,#ffdbe6 0%, #ccf0ff 50%); }
+    }
+
+    /* ---------- Card ---------- */
+    .card {
+      width: 100%;
+      max-width: 980px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 26px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+      position: relative;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      margin: 6px 0;
+      font-size: 36px;
+      line-height: 1.05;
+      background: linear-gradient(90deg,var(--accent2),var(--accent1));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+    }
+    header h2 {
+      margin: 6px 0;
+      color: #333;
+      font-weight: 500;
+    }
+
+    /* ---------- Intro prompt ---------- */
+    #surpriseQuestion {
+      text-align: center;
+      padding: 34px 10px;
+    }
+    #yesBtn {
+      background: linear-gradient(90deg,var(--accent1),var(--accent2));
+      border: none;
+      color: white;
+      padding: 12px 22px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(255,51,153,0.18);
+    }
+    #yesBtn:hover { transform: translateY(-2px); }
+
+    /* ---------- Main content ---------- */
+    #mainContent { display: none; opacity: 0; transition: opacity 900ms ease; }
+
+    .top-row {
+      display:flex;
+      gap:20px;
+      align-items:center;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 6px;
+      margin-bottom: 18px;
+    }
+
+    /* animated plant */
+    .plant {
+      width: 80px;
+      height: 0;
+      background: linear-gradient(#1b8a2f,#31c03a);
+      margin: 6px auto;
+      border-radius: 18px 18px 10px 10px;
+      animation: plantGrow 1.8s forwards ease-out;
+      box-shadow: inset 0 -6px 10px rgba(0,0,0,0.08);
+    }
+    @keyframes plantGrow { from {height:0} to {height:160px} }
+
+    /* tabs */
+    .tabs { text-align:center; margin-top: 6px; }
+    .tabs button {
+      padding: 10px 16px;
+      margin: 6px;
+      border-radius: 10px;
+      border: none;
+      background: var(--glass);
+      cursor: pointer;
+      font-weight:600;
+      color: #333;
+    }
+    .tabs button.active { background: linear-gradient(90deg,var(--accent2),var(--accent1)); color: white; }
+
+    .content {
+      margin-top: 18px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.95);
+      border-radius: 12px;
+      padding: 14px;
+      width: 100%;
+      max-width: 680px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+    }
+
+    /* images gallery */
+    .gallery { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+    .gallery img { width: 150px; height: 120px; object-fit:cover; border-radius: 10px; border: 3px solid rgba(255,102,204,0.12); cursor: pointer; }
+
+    /* songs list */
+    .song-row { display:flex; gap:10px; align-items:center; padding:8px; border-radius:8px; }
+    .song-row audio { width: 100%; }
+
+    /* letter styling */
+    .letter {
+      text-align:left;
+      line-height: 1.6;
+      font-size: 18px;
+      color: #333;
+    }
+    .letter .signature { margin-top: 12px; font-weight:700; color: var(--accent2); }
+
+    /* upload UI */
+    .upload-row { display:flex; gap:10px; align-items:center; margin-top: 8px; flex-wrap:wrap; }
+    .file-input {
+      display:inline-block;
+      padding:10px 12px;
+      border-radius:10px;
+      background: #f8f8f8;
+      border:1px dashed #ddd;
+      cursor:pointer;
+    }
+    .btn { padding:10px 14px; border-radius:10px; border:none; cursor:pointer; }
+    .btn.primary { background: linear-gradient(90deg,var(--accent1),var(--accent2)); color:white; font-weight:700; }
+
+    /* QR */
+    .qr-block { margin-top: 20px; text-align:center; }
+    .qr-block img { width:140px; border: 4px solid rgba(255,102,204,0.12); border-radius:12px; }
+
+    /* balloons & confetti containers are absolute */
+    #balloonsContainer, #confettiContainer {
+      position: absolute;
+      left:0; right:0; pointer-events:none; top:0; bottom:0;
+    }
+
+    /* responsive */
+    @media (max-width:720px){
+      header h1 { font-size:28px; }
+      .gallery img { width:120px; height:90px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="main">
+    <header>
+      <h1>Happy Birthday, Prerna! 🎉</h1>
+      <h2>Your bro — Suraj</h2>
+    </header>
+
+    <!-- SURPRISE PROMPT -->
+    <div id="surpriseQuestion">
+      <p style="font-size:18px;">Hey Prerna! Want to see your birthday surprise? 💫</p>
+      <button id="yesBtn" class="btn primary" onclick="showSurprise()">Yes, show me!</button>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="mainContent">
+      <div class="top-row">
+        <div>
+          <div class="plant" aria-hidden="true"></div>
+        </div>
+        <div style="text-align:left; min-width:260px;">
+          <h1 style="font-size:28px; margin:0">Today is a special day for you! 🌟</h1>
+          <p style="margin:6px 0 0; color:#444;">Open each tab for messages, photos, songs and a letter I wrote just for you.</p>
+        </div>
+      </div>
+
+      <!-- tabs -->
+      <div class="tabs" role="tablist">
+        <button class="tabBtn active" data-tab="message" onclick="openTab('message', this)">Message</button>
+        <button class="tabBtn" data-tab="pics" onclick="openTab('pics', this)">Pictures</button>
+        <button class="tabBtn" data-tab="songs" onclick="openTab('songs', this)">Songs</button>
+        <button class="tabBtn" data-tab="letter" onclick="openTab('letter', this)">Letter</button>
+      </div>
+
+      <div class="content">
+        <div id="message" class="panel tabcontent" style="display:block;">
+          <p style="font-size:20px; font-weight:600;">Hey Prerna! Wishing you the happiest birthday — may your day be full of fun, cake, and smiles! 🥳💖</p>
+          <p>Click the Pictures or Songs tab to add photos and music — anything you upload will stay here so you can come back anytime.</p>
+        </div>
+
+        <div id="pics" class="panel tabcontent" style="display:none;">
+          <h3 style="margin-top:0;">Pictures</h3>
+
+          <div class="upload-row">
+            <label class="file-input" for="imageUpload">Choose image</label>
+            <input id="imageUpload" type="file" accept="image/*" style="display:none" />
+            <button id="uploadImageBtn" class="btn primary">Upload Picture</button>
+            <div id="imageProgress" style="min-width:140px;"></div>
+          </div>
+
+          <div id="gallery" class="gallery" aria-live="polite" style="margin-top:12px;"></div>
+        </div>
+
+        <div id="songs" class="panel tabcontent" style="display:none;">
+          <h3 style="margin-top:0;">Songs</h3>
+          <div class="upload-row">
+            <label class="file-input" for="audioUpload">Choose audio</label>
+            <input id="audioUpload" type="file" accept="audio/*" style="display:none" />
+            <button id="uploadAudioBtn" class="btn primary">Upload Song</button>
+            <div id="audioProgress" style="min-width:140px;"></div>
+          </div>
+
+          <div id="songsList" style="margin-top:12px;"></div>
+        </div>
+
+        <div id="letter" class="panel tabcontent" style="display:none;">
+          <h3 style="margin-top:0;">A letter for you ✨</h3>
+          <div class="letter">
+            <p>Dear <strong>Prerna</strong>, 💖</p>
+
+            <p>Happy Birthday! 🎉 I made this little surprise for you because you deserve all the happiness today.</p>
+
+            <p>Sometimes you tease me — and honestly, I think it’s funny! I don’t focus on it because what matters most is our friendship. You make me laugh, and our silly moments are the best. 😄</p>
+
+            <p>Are you my classmate or my sister? I get confused — maybe you’re both! Either way, I'm so lucky to have you close by. You help me in school, you share jokes, and you somehow make every day brighter. 🌟</p>
+
+            <p>We’ve made so many fun memories: the jokes no one else gets, the small pranks, the times we studied and messed around — all of it means a lot. I hope this site makes your birthday a little more special. After you open the tabs, feel free to upload more pictures or songs — I’ll keep them saved here for you always.</p>
+
+            <p>Enjoy your day, eat lots of cake, and never stop smiling! 🎂🥳</p>
+
+            <p class="signature">Your Bro,<br>Suraj 💫</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- QR code -->
+      <div class="qr-block panel" style="max-width:320px; margin:18px auto 0;">
+        <h4 style="margin:0 0 8px">Scan to open this website on your phone</h4>
+        <img id="qrImg" src="" alt="QR code" />
+        <p style="font-size:13px; color:#666; margin:8px 0 0;">(Replace host URL in code with your site URL after deploying.)</p>
+      </div>
+    </div> <!-- end mainContent -->
+  </div> <!-- end card -->
+
+  <!-- balloons / confetti containers -->
+  <div id="balloonsContainer"></div>
+  <div id="confettiContainer"></div>
+
+  <!-- -------- Firebase SDK (compat) -------- -->
+  <!-- Using compat SDK for simpler code in a single HTML file -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+
+  <script>
+    /*******************************
+      USER ACTION: PUT YOUR FIREBASE CONFIG OBJECT HERE
+      Example:
+      const firebaseConfig = {
+        apiKey: "ABC",
+        authDomain: "yourproject.firebaseapp.com",
+        projectId: "yourproject",
+        storageBucket: "yourproject.appspot.com",
+        messagingSenderId: "123",
+        appId: "1:123:web:abc"
+      };
+    ********************************/
+    const firebaseConfig = /* PUT YOUR FIREBASE CONFIG OBJECT HERE */ {};
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const storage = firebase.storage();
+    const db = firebase.firestore();
+
+    // Host URL (set after you deploy)
+    const HOST_URL = "https://yourusername.github.io/birthday-for-prerna/"; // <-- REPLACE after deploy
+    document.getElementById('qrImg').src =
+      `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(HOST_URL)}`;
+
+    // UI refs
+    const imageUpload = document.getElementById('imageUpload');
+    const uploadImageBtn = document.getElementById('uploadImageBtn');
+    const imageProgress = document.getElementById('imageProgress');
+    const gallery = document.getElementById('gallery');
+
+    const audioUpload = document.getElementById('audioUpload');
+    const uploadAudioBtn = document.getElementById('uploadAudioBtn');
+    const audioProgress = document.getElementById('audioProgress');
+    const songsList = document.getElementById('songsList');
+
+    // handle file input labels clicking
+    document.querySelector('label[for="imageUpload"]').addEventListener('click', () => imageUpload.click());
+    document.querySelector('label[for="audioUpload"]').addEventListener('click', () => audioUpload.click());
+
+    // Upload image
+    uploadImageBtn.addEventListener('click', () => {
+      const file = imageUpload.files[0];
+      if (!file) { alert('Pick an image first'); return; }
+      const ext = file.name.split('.').pop();
+      const filename = `images/${Date.now()}_${Math.floor(Math.random()*1000)}.${ext}`;
+      const ref = storage.ref().child(filename);
+      const task = ref.put(file);
+
+      task.on('state_changed',
+        snapshot => {
+          const pct = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+          imageProgress.innerText = `Uploading: ${pct}%`;
+        },
+        err => { console.error(err); imageProgress.innerText = 'Upload failed'; alert('Image upload failed'); },
+        async () => {
+          const url = await task.snapshot.ref.getDownloadURL();
+          // save metadata to Firestore
+          db.collection('images').add({
+            url, name: file.name, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          imageProgress.innerText = 'Uploaded ✅';
+          imageUpload.value = '';
+          setTimeout(()=> imageProgress.innerText = '', 1200);
+          loadGallery(); // refresh
+        }
+      );
+    });
+
+    // Upload audio
+    uploadAudioBtn.addEventListener('click', () => {
+      const file = audioUpload.files[0];
+      if (!file) { alert('Pick an audio file first'); return; }
+      const ext = file.name.split('.').pop();
+      const filename = `songs/${Date.now()}_${Math.floor(Math.random()*1000)}.${ext}`;
+      const ref = storage.ref().child(filename);
+      const task = ref.put(file);
+
+      task.on('state_changed',
+        snapshot => {
+          const pct = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+          audioProgress.innerText = `Uploading: ${pct}%`;
+        },
+        err => { console.error(err); audioProgress.innerText = 'Upload failed'; alert('Audio upload failed'); },
+        async () => {
+          const url = await task.snapshot.ref.getDownloadURL();
+          // save metadata to Firestore
+          db.collection('songs').add({
+            url, name: file.name, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          audioProgress.innerText = 'Uploaded ✅';
+          audioUpload.value = '';
+          setTimeout(()=> audioProgress.innerText = '', 1200);
+          loadSongs(); // refresh
+        }
+      );
+    });
+
+    // Load gallery from Firestore
+    async function loadGallery() {
+      gallery.innerHTML = '';
+      const snap = await db.collection('images').orderBy('createdAt','desc').get();
+      snap.forEach(doc => {
+        const data = doc.data();
+        const img = document.createElement('img');
+        img.src = data.url;
+        img.alt = data.name || 'image';
+        img.addEventListener('click', () => window.open(data.url, '_blank'));
+        gallery.appendChild(img);
+      });
+    }
+
+    // Load songs
+    async function loadSongs() {
+      songsList.innerHTML = '';
+      const snap = await db.collection('songs').orderBy('createdAt','desc').get();
+      snap.forEach(doc => {
+        const data = doc.data();
+        const row = document.createElement('div');
+        row.className = 'song-row';
+        const label = document.createElement('div');
+        label.style.minWidth = '140px';
+        label.textContent = data.name || 'Song';
+        const audio = document.createElement('audio');
+        audio.controls = true;
+        audio.src = data.url;
+        row.appendChild(label);
+        row.appendChild(audio);
+        songsList.appendChild(row);
+      });
+    }
+
+    // show main content and start decorations
+    function showSurprise() {
+      document.getElementById('surpriseQuestion').style.display = 'none';
+      const main = document.getElementById('mainContent');
+      main.style.display = 'block';
+      setTimeout(()=> main.style.opacity = 1, 40);
+
+      createBalloons(12);
+      createConfetti(28);
+
+      // play a soft optional tune (can be removed)
+      //const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); audio.play();
+      // Load existing content
+      loadGallery();
+      loadSongs();
+    }
+
+    // tabs control
+    function openTab(name, btn) {
+      document.querySelectorAll('.tabcontent').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.tabBtn').forEach(b=> b.classList.remove('active'));
+      document.getElementById(name).style.display = 'block';
+      if (btn) btn.classList.add('active');
+    }
+
+    // balloons & confetti creation
+    function createBalloons(n){
+      const container = document.getElementById('balloonsContainer');
+      for(let i=0;i<n;i++){
+        const b = document.createElement('div');
+        b.className = 'balloon';
+        const hue = Math.floor(Math.random()*360);
+        b.style.background = `hsl(${hue} 80% 60%)`;
+        b.style.left = (Math.random()*90) + 'vw';
+        b.style.bottom = '-80px';
+        const dur = 6 + Math.random()*8;
+        b.style.animation = `floatUp ${dur}s linear ${Math.random()*3}s infinite`;
+        b.style.opacity = 0.95;
+        container.appendChild(b);
+        // remove after large time to avoid DOM bloat
+        setTimeout(()=> { try{ container.removeChild(b); }catch(e){} }, (dur+6)*1000);
+      }
+    }
+
+    function createConfetti(n){
+      const container = document.getElementById('confettiContainer');
+      for(let i=0;i<n;i++){
+        const c = document.createElement('div');
+        c.className = 'confetti';
+        const hue = Math.floor(Math.random()*360);
+        c.style.background = `hsl(${hue} 80% 60%)`;
+        c.style.left = Math.random()*100 + 'vw';
+        c.style.top = (Math.random()*20) + 'px';
+        const dur = 3 + Math.random()*5;
+        c.style.animation = `fall ${dur}s linear ${Math.random()*1}s`;
+        container.appendChild(c);
+        setTimeout(()=> { try{ container.removeChild(c); }catch(e){} }, (dur+1)*1000);
+      }
+    }
+
+    // on load: set a default QR (host url might be changed later). Also load gallery/songs if firebase config is present.
+    (function init(){
+      // create initial QR (if host is placeholder it will still show)
+      document.getElementById('qrImg').src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(HOST_URL)}`;
+      // If firebase config is not filled, show a warning in console
+      if (!firebaseConfig || Object.keys(firebaseConfig).length === 0) {
+        console.warn('Firebase config is empty. Add your firebaseConfig object to the HTML to enable uploads & storage.');
+      } else {
+        // try load content (in case already shown)
+        // loadGallery(); loadSongs(); // will be called after showSurprise so we don't hit before user opens
+      }
+    })();
+  </script>
+</body>
+</html>
